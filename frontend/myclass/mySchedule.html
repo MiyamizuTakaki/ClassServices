@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<link rel="stylesheet"  type="text/css" href="/js/veritylogin.js">
+<div class="alert alert-info">
+    <strong>注意</strong>
+    <div id="alertinfo111"> 您下一节课程是</div>
+</div>
+<div class="container">
+    <table class="table table-hover table-bordered" id="mozhide">
+        <tdead>
+            <tr>
+                <td>名称</td>
+                <td id="name">信息</td>
+            </tr>
+            <tr>
+                <td>时间</td>
+                <td id="time">信息</td>
+            </tr>
+            <tr>
+                <td>地点</td>
+                <td id="where">信息</td>
+            </tr>
+            <tr>
+                <td>类型</td>
+                <td id="tip">信息</td>
+            </tr>
+            <tr>
+                <td>教师姓名</td>
+                <td id="teacher">信息</td>
+            </tr>
+            <tr>
+                <td>您的状态</td>
+                <td id="yourattidue">信息</td>
+            </tr>
+        </tdead>
+    </table>
+</div>
+<script>
+  $(document).ready(function (){
+    token =$.cookie('users_token')
+    console.log(token)
+    $.post("/Nowcourse",{
+       users_token: token
+    },
+    function (data){
+      console.log(data);
+        if (data["status"]===2 &&data["code"]===1){
+        $("#alertinfo111").text("今天没有课程哦，可以休息，准备明天吧");
+        $("#mozhide").hide()
+        }
+        if (data["status"]===2 &&data["code"]===0){
+        $("#alertinfo111").text("今天没有课程哦");
+        $("#mozhide").hide()
+        }
+    })
+  })
+
+</script>
+</html>

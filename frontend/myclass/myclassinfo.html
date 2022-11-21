@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="js/jquery.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.cookie.min.js"></script>
+<link rel="stylesheet"  type="text/css" href="/js/veritylogin.js">
+<style>
+    .mt-0 {
+margin-top: 0 !important;
+}
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <div class="col">小组编号</div>
+    <select id="selectGroup" class="form-control form-control-placeholder">
+            <option value="-1" id ="setgrp" disabled selected hidden>默认</option>
+<!--            <option value="0" style="color: black;">默认</option>-->
+<!--            <option value="1" style="color: black;">0</option>-->
+<!--            <option value="2" style="color: black;">1</option>-->
+<!--            <option value="3" style="color: black;">2</option>-->
+<!--            <option value="4" style="color: black;">3</option>-->
+        </select>
+        </div>
+        <div class="col-4">
+            <div class="col">小组编号</div>
+    <select id="selectmGroup" class="form-control form-control-placeholder">
+            <option value="-1" id="grpnor" disabled selected hidden>默认</option>
+<!--            <option value="0" style="color: black;">默认</option>-->
+<!--            <option value="1" style="color: black;">0</option>-->
+<!--            <option value="2" style="color: black;">1</option>-->
+<!--            <option value="3" style="color: black;">2</option>-->
+<!--            <option value="4" style="color: black;">3</option>-->
+        </select>
+        </div>
+        <div class="col-4">
+            <div class="col">日期</div>
+    <select id="selectDay" class="form-control form-control-placeholder">
+            <option value="-1" id="chse1" disabled selected hidden >选择</option>
+            <option value="0" style="color: black;">星期一</option>
+            <option value="1" style="color: black;">星期二</option>
+            <option value="2" style="color: black;">星期三</option>
+            <option value="3" style="color: black;">星期四</option>
+            <option value="4" style="color: black;">星期五</option>
+            <option value="4" style="color: black;">星期六</option>
+            <option value="4" style="color: black;">星期=日</option>
+
+        </select>
+            <div class="col-4">
+            <div class="col">单双周</div>
+    <select id="selectWeek" class="form-control form-control-placeholder">
+            <option value="-1" id="weks" disabled selected hidden >全部</option>
+            <option value="0" style="color: black;">全部</option>
+            <option value="1" style="color: black;">单数周</option>
+            <option value="2" style="color: black;">双数周</option>
+        </select>
+        </div>
+    </div>
+</div>
+
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>小组号码</td>
+                <td>名称</td>
+                <td>时间</td>
+                <td>地点</td>
+                <td>类型</td>
+                <td>教师姓名</td>
+            </tr>
+        </thead>
+        <tbody  id="mozhide">
+        <tr>
+            <td>dfgdgdf</td>
+            <td>dfgdgdf</td>
+            <td>dfgdgdf</td>
+            <td>dfgdgdf</td>
+            <td>dfgdgdf</td>
+            <td>dfgdgdf</td>
+            <td>dfgdgdf</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<script>
+  $(document).ready(function (){
+      String.prototype.format = function() {
+    var formatted = this;
+    for( var arg in arguments ) {
+        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+    }
+    return formatted;
+};
+      $("#mozhide").hide()
+    token =$.cookie('users_token')
+    console.log(token)
+    $.post("/getcourse",{
+       users_token: token
+    },
+    function (detail){
+      console.log(detail)
+        var mmdd = new Date();
+      var dates =mmdd.getDay();
+      var lists =0;
+       for(var j =0;i<detail.length;i++){
+
+          }
+    })
+      $.post("/infos",{
+       users_token: token
+    },
+    function (detail){
+      console.log(detail)
+        console.log("detail")
+        var mmdd = new Date();
+      var dates =mmdd.getDay();
+      var lists =0;
+      if(detail["code"]===1){
+          $("#setgrp").text(detail["groups"])
+          var listgrp = detail["groups"].split(",")
+          var into = '<option value={0} style=\"color: black;\">全部</option>'.format(1)
+           $("#selectGroup").append(into);
+          for(var i=0;i<listgrp.length;i++){
+              into = '<option value={0} style=\"color: black;\">{1}</option>'.format(i+1,listgrp[i])
+              $("#selectGroup").append(into);
+          }
+
+      }
+    })
+      $.post("/advsrch",{
+       users_token: token
+    },function (detail) {
+
+      })
+      $("#chse1").text(function getDataWeek() {
+	var today = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    var tdynum=[0,1,2,3,4,5,6]
+    var mmdd = new Date();
+          return today[mmdd.getDay()];
+})
+      $("#weks").text(function getDataWeek() {
+    var tdynum=[0,1,2,3,4,5,6]
+    var mmdd = new Date();
+    var dsz = Math.floor((mmdd.getTime() / 60 / 60 / 24 / 365 / 7) % 2 + 1)
+          if (dsz ===1)
+          {
+              return  "单数周"
+          }else {
+              return  "双数周"
+          }
+
+})
+  })
+
+</script>
+
+</html>

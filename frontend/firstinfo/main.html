@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 新 Bootstrap4 核心 CSS 文件 -->
+  <!-- 新 Bootstrap4 核心 CSS 文件 -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+  <script src="/js/jquery.min.js"></script>
+  <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+  <script src="/js/popper.min.js"></script>
+  <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.cookie.min.js"></script>
+  <script src="js/veritylogin.js"></script>
+    <meta charset="UTF-8">
+    <title>主要信息</title>
+</head>
+
+<style>
+  th,td{
+    width: 20%;
+    text-align: center;
+  }
+</style>
+<body>
+  <div class="container">
+    <h2>我的基本信息</h2>
+    <h3 class="groupnumber"></h3>
+    <table class="table table-hover table-bordered">
+      <tdead>
+      <tr>
+        <td>姓名</td>
+        <td id="name"></td>
+      </tr>
+      <tr>
+        <td>学位</td>
+        <td id="Bachelor"></td>
+      </tr>
+      <tr>
+        <td>学号</td>
+        <td id="id"></td>
+      </tr>
+      <tr>
+        <td>出生日期</td>
+        <td id="birthdate"></td>
+      </tr>
+      <tr>
+        <td>电话号码</td>
+        <td id="telephone"></td>
+      </tr>
+      <tr>
+        <td>出勤次数</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>学习开始时间</td>
+        <td id="startstudy"></td>
+      </tr>
+      <tr>
+        <td>学习结束时间（预计）</td>
+        <td id="endstudy"></td>
+      </tr>
+        <tr>
+        <td>学生状态</td>
+        <td id="student_status"></td>
+      </tr>
+        </tr>
+        <tr>
+        <td>电子邮件</td>
+        <td id="email"></td>
+      </tr>
+      </tdead>
+    </table>
+  </div>
+</body>
+<script>
+  $(document).ready(function(){
+        token =$.cookie('users_token')
+        console.log(token)
+        $.post("/userinfo/main",
+    {
+        users_token: token
+    },
+    function(detail){
+        console.log(detail)
+        $("#name").text(detail["name"])
+      $("#Bachelor").text(detail["Bachelor"])
+      $("#id").text(detail["id"])
+      $("#telephone").text(detail["telephone"])
+      $("#startstudy").text(detail["startstudy"])
+      $("#endstudy").text(detail["endstudy"])
+      $("#student_status").text(detail["student_status"])
+      $("#email").text(detail["email"])
+      $("#birthdate").text(detail["birthdate"])
+
+    });
+    });
+</script>
+</html>

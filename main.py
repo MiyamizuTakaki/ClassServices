@@ -68,7 +68,8 @@ async def login(uname: str = Form(...), pswd: str = Form(...),db: Session = Depe
     jsons = {"code":0,"detail":db_user.usernames}
     sqlcurd.set_user_token(db,usernames=uname,token=token)
     returnsponce = JSONResponse(content=jsonable_encoder(jsons), status_code=200)
-    returnsponce.set_cookie(key="users_token", value=token,expires=5400)
+    ##returnsponce.set_cookie(key="users_token", value=token,expires=5400)
+    returnsponce.set_cookie(key="users_token", value=token,expires=9999999)
     return returnsponce
     ##return {"usr": uname,"pwd":pswd}
 # crud.py==sqlcurd.py

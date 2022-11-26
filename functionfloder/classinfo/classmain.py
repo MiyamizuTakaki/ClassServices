@@ -27,6 +27,16 @@ async def nowcourse(users_token: Optional[str] = Cookie(None),db: Session = Depe
 @course.post("/advsrch",tags=["courses"])
 async def advsrch( grps: str= Form(...), mgrp: int= Form(...), date: int= Form(...), week: int= Form(...),db: Session = Depends(get_db)):
     try:
+        if date!= 8:
+            date = date+1
+        else:
+            date =0
         return JSONResponse(content=jsonable_encoder(advancesearch(db,grps, mgrp, date, week)),status_code=200)
+    except:
+        raise HTTPException(status_code=404)
+@course.post("/grpinfo",tags=["courses"])
+async def grpinfo(grps:str,db:Session = Depends(get_db)):
+    try:
+        return JSONResponse(content=jsonable_encoder(get_groupinfo(db,grps)), status_code=200)
     except:
         raise HTTPException(status_code=404)

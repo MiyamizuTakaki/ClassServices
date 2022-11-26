@@ -86,3 +86,10 @@ def advancesearch(db: Session, grps: str, mgrp: int, date: int, week: int):
             reninfo[i]= infosdict(info)
             i =i+1
     return reninfo
+def get_groupinfo(db:Session,grp:str):
+    db_user = db.query(SQLORM.GroupList).filter(SQLORM.GroupList.grpnum == grp).first()
+    return {"grpnum":db_user.grpnum,
+            "Faculy":db_user.Faculy,
+            "facname":db_user.facname,
+            "antrname":db_user.antrname,
+            "studnum":db_user.studnum}

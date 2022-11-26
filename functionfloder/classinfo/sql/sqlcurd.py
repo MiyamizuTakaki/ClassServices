@@ -28,7 +28,6 @@ def infosdict(info):
     }
     return dicts
 
-
 def getcourse(db: Session, token: str):
     db_user = db.query(SQLORM.UserList).filter(SQLORM.UserList.token == token).first()
     if db_user is not None:
@@ -40,7 +39,6 @@ def getcourse(db: Session, token: str):
             for info in infos:
                 classinfo.append(infosdict(info))
         return classinfo
-
 
 def nowcoursesql(db: Session, token: str):
     times = time.strftime("%H:%M:%S", time.localtime())
@@ -64,7 +62,6 @@ def nowcoursesql(db: Session, token: str):
     if time.strptime(day, "%w") > time.strptime("6", "%w"):
         return {"status": 2, "code": 0}
     return {"status": 2, "code": 1}
-
 
 def advancesearch(db: Session, grps: str, mgrp: int, date: int, week: int):
     reninfo ={}
@@ -93,3 +90,17 @@ def get_groupinfo(db:Session,grp:str):
             "facname":db_user.facname,
             "antrname":db_user.antrname,
             "studnum":db_user.studnum}
+def get_moreinfo(db:Session,info:str,tip:str):
+    if tip=="grp":
+        db_user = db.query(SQLORM.GroupList).filter(SQLORM.GroupList.grpnum.like(info+'%')).order_by(SQLORM.GroupList.desc()).all()
+        if db_user is not None:
+            get ={}
+            i=0
+            for dbs in db_user:
+                get[i]=dbs.grpnum
+            return get
+    elif tip=="mgrp":
+        db_user = db.query(SQLORM.GroupList).filter(SQLORM.GroupList.grpnum == info).first()
+        if db_user is not None:
+            return int(db_user.studnum)
+    return None

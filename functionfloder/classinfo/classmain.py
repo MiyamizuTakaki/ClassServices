@@ -40,3 +40,13 @@ async def grpinfo(grps:str,db:Session = Depends(get_db)):
         return JSONResponse(content=jsonable_encoder(get_groupinfo(db,grps)), status_code=200)
     except:
         raise HTTPException(status_code=404)
+@course.post("/avssimp",tags=["courses"])
+async def avssimp(info:str, tip:str,db:Session=Depends(get_db)):
+    try:
+        isd = get_moreinfo(db, info, tip)
+        if isd is not None:
+            return JSONResponse(content=jsonable_encoder(isd), status_code=200)
+        else:
+            raise HTTPException(status_code=404)
+    except:
+        raise HTTPException(status_code=404)

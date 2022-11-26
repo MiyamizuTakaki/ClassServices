@@ -14,27 +14,13 @@ margin-top: 0 !important;
 </style>
 <div class="container">
     <form action="/advsrch" method="post" name="userinfo"  id="userpass">
-            <div >大组编号</div>
-        <label for="selectGroup"></label><select id="selectGroup" class="form-control form-control-placeholder">
+        <label for="selectGroup">大组编号</label><select id="selectGroup" class="form-control form-control-placeholder">
             <option value="-1" id ="setgrp" disabled selected hidden>默认</option>
-<!--            <option value="0" style="color: black;">默认</option>-->
-<!--            <option value="1" style="color: black;">0</option>-->
-<!--            <option value="2" style="color: black;">1</option>-->
-<!--            <option value="3" style="color: black;">2</option>-->
-<!--            <option value="4" style="color: black;">3</option>-->
         </select>
-
-            <div>小组编号</div>
-        <label for="selectmGroup"></label><select id="selectmGroup" class="form-control form-control-placeholder">
+        <label for="selectmGroup">小组编号</label><select id="selectmGroup" class="form-control form-control-placeholder">
             <option value="0" id="grpnor" disabled selected hidden>0</option>
-<!--            <option value="0" style="color: black;">默认</option>-->
-<!--            <option value="1" style="color: black;">0</option>-->
-<!--            <option value="2" style="color: black;">1</option>-->
-<!--            <option value="3" style="color: black;">2</option>-->
-<!--            <option value="4" style="color: black;">3</option>-->
         </select>
-            <div>日期</div>
-        <label for="selectDay"></label><select id="selectDay" class="form-control form-control-placeholder">
+        <label for="selectDay">日期</label><select id="selectDay" class="form-control form-control-placeholder">
             <option value="-1" id="chse1" disabled selected hidden >选择</option>
             <option value="0" style="color: black;">星期一</option>
             <option value="1" style="color: black;">星期二</option>
@@ -42,8 +28,7 @@ margin-top: 0 !important;
             <option value="3" style="color: black;">星期四</option>
             <option value="4" style="color: black;">星期五</option>
             <option value="4" style="color: black;">星期六</option>
-            <option value="4" style="color: black;">星期=日</option>
-
+            <option value="4" style="color: black;">星期日</option>
         </select>
             <div>单双周</div>
         <label for="selectWeek"></label><select id="selectWeek" class="form-control form-control-placeholder">
@@ -55,7 +40,7 @@ margin-top: 0 !important;
                 <button type="submit" class="btn btn-primary" id="classsearch">查询</button>
 
         </form>
-</div>
+
 
     <table class="table table-hover table-bordered">
         <thead>
@@ -74,7 +59,7 @@ margin-top: 0 !important;
 
         </tbody>
     </table>
-</div>
+    </div>
 <script>
   $(document).ready(function (){
       var sectotime = function (second){

@@ -126,10 +126,10 @@
         token =$.cookie('users_token')
         console.log(token)
         $.post("/cookiess",
-    {
-        users_token: token
-    },
-    function(detail){
+            {
+                users_token: token
+            },
+            function (detail) {
         console.log(detail)
         $("#setview").hide();
         if(detail["code"]=="1")

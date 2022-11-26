@@ -3,9 +3,11 @@ import pydantic
 from .SQLMAIN import Base
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.orm import relationship
-class UserList(Base):##用户基础数据
+
+
+class UserList(Base):  ##用户基础数据
     __tablename__ = "UserList"
-    id = Column(String,unique =True,primary_key=True)
+    id = Column(String, unique=True, primary_key=True)
     usernames = Column(String, unique=True)
     passwords = Column(String)
     ACL = Column(Integer)
@@ -14,20 +16,22 @@ class UserList(Base):##用户基础数据
     tokenstart = Column(Integer)
     mgroup = Column(Integer)
 
+
 class GroupList(Base):
     __tablename__ = "GroupList"
-    grpnum = Column(String(100),unique=True,primary_key=True)
+    grpnum = Column(String(100), unique=True, primary_key=True)
     Faculy = Column(String(100))
-    facname = Column(String(100),unique=True)
+    facname = Column(String(100), unique=True)
     antrname = Column(String(100))
     statime = Column(String)
     endtime = Column(String)
     studnum = Column(String)
 
+
 class ACL_List(Base):
-    __tablename__="ACL_List"
-    numbers = Column(Integer,unique=True,primary_key=True)
-    names = Column(String(100),unique=True)
+    __tablename__ = "ACL_List"
+    numbers = Column(Integer, unique=True, primary_key=True)
+    names = Column(String(100), unique=True)
     superuser = Column(Integer)
     monitor = Column(Integer)
     class_schc = Column(Integer)
@@ -35,13 +39,14 @@ class ACL_List(Base):
     file = Column(Integer)
     terminal = Column(Integer)
 
+
 class course(Base):
-    __tablename__="course"
+    __tablename__ = "course"
     groupint = Column(String)
-    numbers = Column(Integer,unique = True,primary_key=True)
+    numbers = Column(Integer, unique=True, primary_key=True)
     days = Column(Integer)
-    names =Column(String(100))
-    starttime =Column(String(100))
+    names = Column(String(100))
+    starttime = Column(String(100))
     endtime = Column(String(100))
     weeks = Column(String(100))
     teacher = Column(String)
@@ -50,17 +55,19 @@ class course(Base):
     types = Column(String)
     mgroup = Column(Integer)
 
+
 class file(Base):
-    __tablename__="file"
-    numbers = Column(Integer,unique = True,primary_key=True)
+    __tablename__ = "file"
+    numbers = Column(Integer, unique=True, primary_key=True)
     groupint = Column(Integer)
-    user_id = Column(Integer,unique = True)
+    user_id = Column(Integer, unique=True)
     acl = Column(Integer)
     path = Column(String)
 
+
 class RealUser(Base):
-    __tablename__="RealUser"
-    id = Column(String(20),unique = True,primary_key=True)
+    __tablename__ = "RealUser"
+    id = Column(String(20), unique=True, primary_key=True)
     name = Column(String)
     groups = Column(String)
     Bachelor = Column(String)

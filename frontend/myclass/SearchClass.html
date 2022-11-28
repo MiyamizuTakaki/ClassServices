@@ -125,6 +125,9 @@
                 }).done(function (data) {
                     $("#mozhide").empty();
                     console.log(data);
+                    if (data["code"] != 1) {
+
+                    }
                     var lengths = 0;
                     for (var ds in data) {
                         lengths++;
@@ -150,23 +153,90 @@
 
             });
             $("#grp").bind('input propertychange', function () {
-                a = $("#grp").val();
-                if (a.length >= 3) {
-                    $.post("/avssimp",
-                        {
-                            info: a,
-                            tip: "grp"
-                        },
-                        function (detail) {
-                            for (var i = 0; i < length(detail); i++)
-                                $("#grpl").append("<option value=\"0.3\">0.3</option>")
+                var a = $("#grp").val();
+                if (a.length >= 4) {
+                    console.log(a.toString())
+                    $("#mgrpl").empty()
+                    //$("#grpl").append("<option value=\"0.3\">0.3</option>")
+                    $.ajax({
+                        type: "POST",
+                        headers: {'Content-Type': 'application/json;charset=utf8'},
+                        url: "/avssimp/",
+                        dataType: "JSON",
+                        data: JSON.stringify({info: a.toString(), tip: 'grp'.toString()}),
+                        encode: true,
+                    }).done(function (detail) {
+                        $("#grpl").empty()
+                        if (detail["code"] != 1) {
+                            for (var i = 0; i <
+                            Object.keys(detail).length; i++) {
+                                $("#grpl").append("<option value={0}></option>".format(detail[i]))
+                            }
+                            $.ajax({
+                                type: "POST",
+                                headers: {'Content-Type': 'application/json;charset=utf8'},
+                                dataType: "JSON",
+                                url: "/avssimp/",
+                                data: JSON.stringify({info: $("#grp").val(), tip: 'mgrp'.toString()}),
+                                encode: true,
+                            }).done(function (detail) {
+                                console.log(detail)
+                                $("#mgrpl").empty()
+                                for (var i = 0; i < parseInt(detail) + 1; i++) {
+                                    $("#mgrpl").append("<option value={0}></option>".format(i))
+                                }
+                            })
+                        }
 
-                        })
+                    })
                 }
 
             })
-        })
 
+        })
+        $(function (){
+            $("#classsearch").click(function (event){
+                var formData = {
+      grps: $("#grpl option:selected").text(),
+      mgrp: $("#mgrpl option:selected").val(),
+      date: $("#selectDay option:selected").val(),
+                week: $("#selectWeek option:selected").val()
+    };
+                $.ajax({
+      type: "POST",
+      url: "/advsrch",
+      data: formData,
+      encode: true,
+    }).done(function (data) {
+        $("#mozhide").empty();
+      console.log(data);
+      var lengths=0;
+      for(var ds in data)
+      {
+          lengths++;
+      }
+      if(lengths===0)
+          alert("没有课程！")
+      for(var i=0;i<lengths;i++)
+      {
+          console.log(sectotime(data[i]["starttime"]))
+          var intoe = '<tr>\n' +
+              '            <td>'+i+'</td>\n' +
+              '            <td>'+data[i]["groupint"]+'</td>\n' +
+              '            <td>'+data[i]["names"]+'</td>\n' +
+              '            <td>'+sectotime(data[i]["starttime"])+'</td>\n' +
+              '            <td>'+sectotime(data[i]["endtime"])+'</td>\n' +
+              '            <td>'+data[i]["address"]+'</td>\n' +
+              '            <td>'+data[i]["type"]+'</td>\n' +
+              '            <td>'+data[i]["teacher"]+'</td>\n' +
+              '        </tr>'
+          $("#mozhide").append(intoe);
+      }
+    });
+                event.preventDefault();
+
+            })
+        })
     })
 
 </script>

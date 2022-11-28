@@ -194,45 +194,43 @@
             })
 
         })
-        $(function (){
-            $("#classsearch").click(function (event){
+        $(function () {
+            $("#classsearch").click(function (event) {
                 var formData = {
-      grps: $("#grpl option:selected").text(),
-      mgrp: $("#mgrpl option:selected").val(),
-      date: $("#selectDay option:selected").val(),
-                week: $("#selectWeek option:selected").val()
-    };
+                    grps: $("#grpl option:selected").text(),
+                    mgrp: $("#mgrpl option:selected").val(),
+                    date: $("#selectDay option:selected").val(),
+                    week: $("#selectWeek option:selected").val()
+                };
                 $.ajax({
-      type: "POST",
-      url: "/advsrch",
-      data: formData,
-      encode: true,
-    }).done(function (data) {
-        $("#mozhide").empty();
-      console.log(data);
-      var lengths=0;
-      for(var ds in data)
-      {
-          lengths++;
-      }
-      if(lengths===0)
-          alert("没有课程！")
-      for(var i=0;i<lengths;i++)
-      {
-          console.log(sectotime(data[i]["starttime"]))
-          var intoe = '<tr>\n' +
-              '            <td>'+i+'</td>\n' +
-              '            <td>'+data[i]["groupint"]+'</td>\n' +
-              '            <td>'+data[i]["names"]+'</td>\n' +
-              '            <td>'+sectotime(data[i]["starttime"])+'</td>\n' +
-              '            <td>'+sectotime(data[i]["endtime"])+'</td>\n' +
-              '            <td>'+data[i]["address"]+'</td>\n' +
-              '            <td>'+data[i]["type"]+'</td>\n' +
-              '            <td>'+data[i]["teacher"]+'</td>\n' +
-              '        </tr>'
-          $("#mozhide").append(intoe);
-      }
-    });
+                    type: "POST",
+                    url: "/advsrch",
+                    data: formData,
+                    encode: true,
+                }).done(function (data) {
+                    $("#mozhide").empty();
+                    console.log(data);
+                    var lengths = 0;
+                    for (var ds in data) {
+                        lengths++;
+                    }
+                    if (lengths === 0)
+                        alert("没有课程！")
+                    for (var i = 0; i < lengths; i++) {
+                        console.log(sectotime(data[i]["starttime"]))
+                        var intoe = '<tr>\n' +
+                            '            <td>' + i + '</td>\n' +
+                            '            <td>' + data[i]["groupint"] + '</td>\n' +
+                            '            <td>' + data[i]["names"] + '</td>\n' +
+                            '            <td>' + sectotime(data[i]["starttime"]) + '</td>\n' +
+                            '            <td>' + sectotime(data[i]["endtime"]) + '</td>\n' +
+                            '            <td>' + data[i]["address"] + '</td>\n' +
+                            '            <td>' + data[i]["type"] + '</td>\n' +
+                            '            <td>' + data[i]["teacher"] + '</td>\n' +
+                            '        </tr>'
+                        $("#mozhide").append(intoe);
+                    }
+                });
                 event.preventDefault();
 
             })

@@ -1,190 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="js/jquery.min.js"></script>
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.cookie.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
-<link rel="stylesheet"  type="text/css" href="/js/veritylogin.js">
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.cookie.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
+<link href="/js/veritylogin.js" rel="stylesheet" type="text/css">
 <style>
     .mt-0 {
-margin-top: 0 !important;
-}
+        margin-top: 0 !important;
+    }
 </style>
 <div class="container">
-    <form action="/advsrch" method="post" name="userinfo"  id="userpass">
-        <label for="selectGroup">大组编号</label><select id="selectGroup" class="form-control form-control-placeholder">
-            <option value="-1" id ="setgrp" disabled selected hidden>默认</option>
-        </select>
-        <label for="selectmGroup">小组编号</label><select id="selectmGroup" class="form-control form-control-placeholder">
-            <option value="0" id="grpnor" disabled selected hidden>0</option>
-        </select>
-        <label for="selectDay">日期</label><select id="selectDay" class="form-control form-control-placeholder">
-            <option value="-1" id="chse1" disabled selected hidden >选择</option>
-            <option value="0" style="color: black;">星期一</option>
-            <option value="1" style="color: black;">星期二</option>
-            <option value="2" style="color: black;">星期三</option>
-            <option value="3" style="color: black;">星期四</option>
-            <option value="4" style="color: black;">星期五</option>
-            <option value="4" style="color: black;">星期六</option>
-            <option value="4" style="color: black;">星期日</option>
-        </select>
-            <div>单双周</div>
-        <label for="selectWeek"></label><select id="selectWeek" class="form-control form-control-placeholder">
-            <option value="-1" id="weks" disabled selected hidden >全部</option>
-            <option value="0" style="color: black;">全部</option>
-            <option value="1" style="color: black;">单数周</option>
-            <option value="2" style="color: black;">双数周</option>
-        </select>
-                <button type="submit" class="btn btn-primary" id="classsearch">查询</button>
+    <form action="/advsrch" id="userpass" method="post" name="userinfo">
+        <label for="selectGroup">大组编号</label><select class="form-control form-control-placeholder" id="selectGroup">
+        <option disabled hidden id="setgrp" selected value="-1">默认</option>
+    </select>
+        <label for="selectmGroup">小组编号</label><select class="form-control form-control-placeholder"
+                                                          id="selectmGroup">
+        <option disabled hidden id="grpnor" selected value="0">0</option>
+    </select>
+        <label for="selectDay">日期</label><select class="form-control form-control-placeholder" id="selectDay">
+        <option disabled hidden id="chse1" selected value="-1">选择</option>
+        <option style="color: black;" value="0">星期一</option>
+        <option style="color: black;" value="1">星期二</option>
+        <option style="color: black;" value="2">星期三</option>
+        <option style="color: black;" value="3">星期四</option>
+        <option style="color: black;" value="4">星期五</option>
+        <option style="color: black;" value="4">星期六</option>
+        <option style="color: black;" value="4">星期日</option>
+    </select>
+        <div>单双周</div>
+        <label for="selectWeek"></label><select class="form-control form-control-placeholder" id="selectWeek">
+        <option disabled hidden id="weks" selected value="-1">全部</option>
+        <option style="color: black;" value="0">全部</option>
+        <option style="color: black;" value="1">单数周</option>
+        <option style="color: black;" value="2">双数周</option>
+    </select>
+        <button class="btn btn-primary" id="classsearch" type="submit">查询</button>
 
-        </form>
+    </form>
 
 
     <table class="table table-hover table-bordered">
         <thead>
-            <tr>
-                <td>序号</td>
-                <td>小组号码</td>
-                <td>名称</td>
-                <td>课程开始时间</td>
-                <td>课程结束时间</td>
-                <td>地点</td>
-                <td>类型</td>
-                <td>教师姓名</td>
-            </tr>
+        <tr>
+            <td>序号</td>
+            <td>小组号码</td>
+            <td>名称</td>
+            <td>课程开始时间</td>
+            <td>课程结束时间</td>
+            <td>地点</td>
+            <td>类型</td>
+            <td>教师姓名</td>
+        </tr>
         </thead>
         <tbody id="mozhide">
 
         </tbody>
     </table>
-    </div>
+</div>
 <script>
-  $(document).ready(function (){
-      var sectotime = function (second){
-          hour = parseInt(second/3600)
-          if(second%3600===0)
-            return hour+":00:00";
-          else
-          {
-              minutes = second%3600/60;
-              if(second%3600%60===0)
-              {
-                  return hour.toString()+":"+minutes.toString()+":"+(second%3600%60).toString();
-              }
-              return hour.toString()+":"+minutes.toString()+":00";
-          }
-      }
-      String.prototype.format = function() {
-    var formatted = this;
-    for( var arg in arguments ) {
-        formatted = formatted.replace("{" + arg + "}", arguments[arg]);
-    }
-    return formatted;
-};
-    token =$.cookie('users_token')
-    console.log(token)
-    $.post("/getcourse",{
-       users_token: token
-    },
-    function (detail){
-      console.log(detail)
-        var mmdd = new Date();
-      var dates =mmdd.getDay();
-      var lists =0;
-       // for(var j =0;i<detail.length;i++){
-       //
-       //    }
-    })
-      $.post("/infos",{
-       users_token: token
-    },
-    function (detail){
-      console.log(detail)
-        console.log("detail")
-        var mmdd = new Date();
-      var dates =mmdd.getDay();
-      var lists =0;
-      if(detail["code"]===1){
-          $("#setgrp").text(detail["groups"])
-          var listgrp = detail["groups"].split(",")
-          var into = '<option value={0} style=\"color: black;\">全部</option>'.format(1)
-           $("#selectGroup").append(into);
-          for(var i=0;i<listgrp.length;i++){
-              into = '<option value={0} style=\"color: black;\">{1}</option>'.format(i+1,listgrp[i])
-
-              $("#selectGroup").append(into);
-          }
-      }
-    })
-      $("#chse1").text(function getDataWeek() {
-	var today = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-    var tdynum=[0,1,2,3,4,5,6]
-    var mmdd = new Date();
-          return today[mmdd.getDay()];
-})
-      $("#weks").text(function getDataWeek() {
-    var tdynum=[0,1,2,3,4,5,6]
-    var mmdd = new Date();
-    var dsz = Math.floor((mmdd.getTime() / 60 / 60 / 24 / 365 / 7) % 2 + 1)
-          if (dsz ===1)
-          {
-              return  "单数周"
-          }else {
-              return  "双数周"
-          }
-
-})
-      $(function () {
-        $("#classsearch").click(function (event) {
-            var formData = {
-      grps: $("#selectGroup option:selected").text(),
-      mgrp: $("#selectmGroup option:selected").text(),
-      date: $("#selectDay option:selected").val(),
-                week: $("#selectWeek option:selected").val()
-    };
-            if($("#selectGroup option:selected").val()===-1||$("#selectGroup option:selected").val()===0)
-            {
-                formData["grps"]="all";
+    $(document).ready(function () {
+        var sectotime = function (second) {
+            hour = parseInt(second / 3600)
+            if (second % 3600 === 0)
+                return hour + ":00:00";
+            else {
+                minutes = second % 3600 / 60;
+                if (second % 3600 % 60 === 0) {
+                    return hour.toString() + ":" + minutes.toString() + ":" + (second % 3600 % 60).toString();
+                }
+                return hour.toString() + ":" + minutes.toString() + ":00";
             }
-            $.ajax({
-      type: "POST",
-      url: "/advsrch",
-      data: formData,
-      encode: true,
-    }).done(function (data) {
-        $("#mozhide").empty();
-      console.log(data);
-      var lengths=0;
-      for(var ds in data)
-      {
-          lengths++;
-      }
-      if(lengths===0)
-          alert("没有课程！")
-      for(var i=0;i<lengths;i++)
-      {
-          console.log(sectotime(data[i]["starttime"]))
-          var intoe = '<tr>\n' +
-              '            <td>'+i+'</td>\n' +
-              '            <td>'+data[i]["groupint"]+'</td>\n' +
-              '            <td>'+data[i]["names"]+'</td>\n' +
-              '            <td>'+sectotime(data[i]["starttime"])+'</td>\n' +
-              '            <td>'+sectotime(data[i]["endtime"])+'</td>\n' +
-              '            <td>'+data[i]["address"]+'</td>\n' +
-              '            <td>'+data[i]["type"]+'</td>\n' +
-              '            <td>'+data[i]["teacher"]+'</td>\n' +
-              '        </tr>'
-          $("#mozhide").append(intoe);
-      }
-    });
-            event.preventDefault();
+        }
+        String.prototype.format = function () {
+            var formatted = this;
+            for (var arg in arguments) {
+                formatted = formatted.replace("{" + arg + "}", arguments[arg]);
+            }
+            return formatted;
+        };
+        token = $.cookie('users_token')
+        console.log(token)
+        $.post("/getcourse", {
+                users_token: token
+            },
+            function (detail) {
+                console.log(detail)
+                var mmdd = new Date();
+                var dates = mmdd.getDay();
+                var lists = 0;
+                // for(var j =0;i<detail.length;i++){
+                //
+                //    }
+            })
+        $.post("/infos", {
+                users_token: token
+            },
+            function (detail) {
+                console.log(detail)
+                console.log("detail")
+                var mmdd = new Date();
+                var dates = mmdd.getDay();
+                var lists = 0;
+                if (detail["code"] === 1) {
+                    $("#setgrp").text(detail["groups"])
+                    var listgrp = detail["groups"].split(",")
+                    var into = '<option value={0} style=\"color: black;\">全部</option>'.format(1)
+                    $("#selectGroup").append(into);
+                    for (var i = 0; i < listgrp.length; i++) {
+                        into = '<option value={0} style=\"color: black;\">{1}</option>'.format(i + 1, listgrp[i])
 
-        });
+                        $("#selectGroup").append(into);
+                    }
+                }
+            })
+        $("#chse1").text(function getDataWeek() {
+            var today = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            var tdynum = [0, 1, 2, 3, 4, 5, 6]
+            var mmdd = new Date();
+            return today[mmdd.getDay()];
+        })
+        $("#weks").text(function getDataWeek() {
+            var tdynum = [0, 1, 2, 3, 4, 5, 6]
+            var mmdd = new Date();
+            var dsz = Math.floor((mmdd.getTime() / 60 / 60 / 24 / 365 / 7) % 2 + 1)
+            if (dsz === 1) {
+                return "单数周"
+            } else {
+                return "双数周"
+            }
+
+        })
+        $(function () {
+            $("#classsearch").click(function (event) {
+                var formData = {
+                    grps: $("#selectGroup option:selected").text(),
+                    mgrp: $("#selectmGroup option:selected").text(),
+                    date: $("#selectDay option:selected").val(),
+                    week: $("#selectWeek option:selected").val()
+                };
+                if ($("#selectGroup option:selected").val() === -1 || $("#selectGroup option:selected").val() === 0) {
+                    formData["grps"] = "all";
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "/advsrch",
+                    data: formData,
+                    encode: true,
+                }).done(function (data) {
+                    $("#mozhide").empty();
+                    console.log(data);
+                    var lengths = 0;
+                    for (var ds in data) {
+                        lengths++;
+                    }
+                    if (lengths === 0)
+                        alert("没有课程！")
+                    for (var i = 0; i < lengths; i++) {
+                        console.log(sectotime(data[i]["starttime"]))
+                        var intoe = '<tr>\n' +
+                            '            <td>' + i + '</td>\n' +
+                            '            <td>' + data[i]["groupint"] + '</td>\n' +
+                            '            <td>' + data[i]["names"] + '</td>\n' +
+                            '            <td>' + sectotime(data[i]["starttime"]) + '</td>\n' +
+                            '            <td>' + sectotime(data[i]["endtime"]) + '</td>\n' +
+                            '            <td>' + data[i]["address"] + '</td>\n' +
+                            '            <td>' + data[i]["type"] + '</td>\n' +
+                            '            <td>' + data[i]["teacher"] + '</td>\n' +
+                            '        </tr>'
+                        $("#mozhide").append(intoe);
+                    }
+                });
+                event.preventDefault();
+
+            });
+        })
+
     })
-
-  })
 
 </script>
 

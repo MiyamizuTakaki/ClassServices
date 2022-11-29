@@ -9,13 +9,13 @@ from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from roterdepender import manageinfo, cssjs
 from functionfloder.classinfo import classmain
-
+from functionfloder.manauser import usermain
 app = FastAPI()
 app.include_router(manageinfo.app1)
 app.include_router(cssjs.sources)
 app.include_router(classmain.course)
 from functionfloder.userinfo import users
-
+app.include_router(usermain.usermain)
 app.include_router(users.usersmain)
 
 

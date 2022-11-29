@@ -132,7 +132,7 @@
 
 </div>
 <div class="footer">
-  宫水软件，版权所有。
+  宫水软件，版权所有。宫水支持早恋！
 </div>
 </body>
 <!--<script src="/js/navgeter.js" type="application/javascript"></script>-->
@@ -186,8 +186,8 @@
     });
   });
   $(document).ready(function (){
-    $("#schoolinfo").click(function(){
-      $.ajax({url:"/school/Infocpmmute.html",async:true,success:function(result){
+    $("#useradmin").click(function(){
+      $.ajax({url:"/manauser/usermain.html",async:true,success:function(result){
           $("#maininfo").html(result);
         }});
     });

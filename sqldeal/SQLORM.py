@@ -70,6 +70,7 @@ class RealUser(Base):
     id = Column(String(20), unique=True, primary_key=True)
     name = Column(String)
     groups = Column(String)
+    mgroup = Column(Integer)
     Bachelor = Column(String)
     Faculty = Column(String)
     birthdate = Column(String)

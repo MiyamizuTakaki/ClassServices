@@ -1,0 +1,226 @@
+<html lang="en">
+<head>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="/js/jquery.min.js"></script>
+    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
+    <script src="/js/popper.min.js"></script>
+    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.cookie.min.js"></script>
+
+    <meta charset="UTF-8">
+    <link href="/css/normalform.css" rel="stylesheet" type="text/css">
+    <link href="/js/veritylogin.js" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap-table.min.css" rel="stylesheet">
+    <script src="/js/bootstrap-table.min.js"></script>
+    <!--<script src="/js/navgeter.js" type="application/javascript"></script>-->
+    <title>我的课表</title>
+</head>
+<div class="container">
+    <div class="row">
+        <div class="col-8">用户管理</div>
+        <div class="col-1">
+            <button class="btn btn-info" type="button">添加用户</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <label for="selectDay">筛选条件</label><select class="form-control form-control-placeholder"
+                                                           id="selectDay">
+            <option disabled hidden id="chse1" selected value="-1">全选</option>
+            <option style="color: black;" value="-1">全选</option>
+            <option style="color: black;" value="0">姓名</option>
+            <option style="color: black;" value="1">学号</option>
+            <option style="color: black;" value="2">生日</option>
+            <option style="color: black;" value="3">组号</option>
+            <option style="color: black;" value="4">院系名称</option>
+        </select>
+        </div>
+        <div class="col-4"><label>筛选条件</label>
+
+            <input class="form-control" id="textinfo" placeholder="内容" type="text"></div>
+        <div class="col-4">
+            <div class="col-4"><label>然后就</label>
+                <button class="btn btn-primary" data-dismiss="modal" id="pwduser">搜索</button>
+            </div>
+        </div>
+    </div>
+    <div id="magerinfo">
+        <table class="table table-hover" id="mytab"></table>
+    </div>
+</div>
+<script>
+    $('#mytab').bootstrapTable({
+                url: '/getuser?ptr=-1',
+                method: 'get',
+                toolbar: "#toolbar",
+                sidePagination: "client",
+                striped: true, // 是否显示行间隔色
+                search: "true",
+                uniqueId: "ID",
+                pageSize: "5",
+                pagination: true, // 是否分页
+                sortable: true, // 是否启用排序
+                columns: [{
+                    field: 'id',
+                    title: '证件号'
+                },
+                    {
+                        field: 'name',
+                        title: '姓名'
+                    },
+                    {
+                        field: 'nickname',
+                        title: '用户昵称'
+                    },
+                    {
+                        field: 'facid',
+                        title: '课程号码'
+                    },
+                    {
+                        field: 'mfacid',
+                        title: '小组号码'
+                    },
+                    {
+                        field: 'price',
+                        title: '角色'
+                    },
+                    {
+                        field: 'clsnumber',
+                        title: '课程号码'
+                    },
+                    {
+                        field: 'fakt',
+                        title: '院系'
+                    },
+                    {
+                        field: 'date',
+                        title: '生日'
+                    },
+                    {
+                        field: 'phone',
+                        title: '电话号码'
+                    },
+                    {
+                        field: 'email',
+                        title: '电子邮件'
+                    },
+                    {
+                        field: 'ststu',
+                        title: '学习开始日期'
+                    },
+                    {
+                        field: 'endstu',
+                        title: '学习结束日期'
+                    },
+                    {
+                        field: 'price',
+                        title: '操作',
+                        width: 120,
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: actionFormatter,
+                    },
+                ]
+            });
+
+    function actionFormatter(value, row, index) {
+        var id = value;
+        var result = "";
+        result += '<button id="edit" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>';
+        result += '<button id="delete" class="btn btn-danger btn-sm" style="margin-left:10px;">删除</button>';
+        return result;
+    }
+
+    $(document).ready(function () {
+        $("#pwduser").click(function () {
+            var dta = {ptr: $("#selectDay").val(), info: $("#textinfo").val()}
+            $('#mytab').bootstrapTable('destroy');
+            $('#mytab').bootstrapTable({
+                url: '/getuser',
+                method: 'post',
+                queryParamsType: '',
+                queryParams: queryParams,
+                toolbar: "#toolbar",
+                sidePagination: "client",
+                striped: true, // 是否显示行间隔色
+                search: "true",
+                uniqueId: "ID",
+                pageSize: "5",
+                pagination: true, // 是否分页
+                sortable: true, // 是否启用排序
+                columns: [{
+                    field: 'id',
+                    title: '证件号'
+                },
+                    {
+                        field: 'name',
+                        title: '姓名'
+                    },
+                    {
+                        field: 'nickname',
+                        title: '用户昵称'
+                    },
+                    {
+                        field: 'facid',
+                        title: '课程号码'
+                    },
+                    {
+                        field: 'mfacid',
+                        title: '小组号码'
+                    },
+                    {
+                        field: 'price',
+                        title: '角色'
+                    },
+                    {
+                        field: 'clsnumber',
+                        title: '课程号码'
+                    },
+                    {
+                        field: 'fakt',
+                        title: '院系'
+                    },
+                    {
+                        field: 'date',
+                        title: '生日'
+                    },
+                    {
+                        field: 'phone',
+                        title: '电话号码'
+                    },
+                    {
+                        field: 'email',
+                        title: '电子邮件'
+                    },
+                    {
+                        field: 'ststu',
+                        title: '学习开始日期'
+                    },
+                    {
+                        field: 'endstu',
+                        title: '学习结束日期'
+                    },
+                    {
+                        field: 'price',
+                        title: '操作',
+                        width: 120,
+                        align: 'center',
+                        valign: 'middle',
+                        formatter: actionFormatter,
+                    },
+                ]
+            });
+
+            function queryParams(params) {
+                return {
+                    ptr: $.trim($("#selectDay").val()),
+                    info: $.trim($("#textinfo").val())
+                }
+            }
+        })
+    })
+
+</script>

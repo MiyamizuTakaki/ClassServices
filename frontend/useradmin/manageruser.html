@@ -2,13 +2,13 @@
 <head>
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <!--    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css" >-->
 
     <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
     <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
-    <script src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="/js/jquery.cookie.min.js"></script>
@@ -21,7 +21,7 @@
     <script src="/js/bootstrap-table.min.js"></script>
     <!--    <link href="/css/bootstrap-datetimepicker.min.css" media="screen" rel="stylesheet"/>-->
     <script src="/js/moment.min.js"></script>
-
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     <script src="/js/bootstrap-datetimepicker.min.js"></script>
     <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
     <!--<script src="/js/navgeter.js" type="application/javascript"></script>-->
@@ -101,7 +101,7 @@
                         <div class="form-group">
                             <label for="id_end_time">Date only:</label>
                             <div class="input-group date" id="id_4">
-                                <input class="form-control" required type="text" value="12/06/2022"/>
+                                <input class="time-input form-control" required type="text" value="12/06/2022"/>
                                 <div class="input-group-addon input-group-append">
                                     <div class="input-group-text">
                                         <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>

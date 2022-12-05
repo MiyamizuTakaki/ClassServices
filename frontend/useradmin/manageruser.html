@@ -1,26 +1,29 @@
 <html lang="en">
 <head>
     <!-- 新 Bootstrap4 核心 CSS 文件 -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
     <!--    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css" >-->
 
-    <script src="/js/jquery.min.js"></script>
+    <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
     <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
     <script src="/js/popper.min.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="/js/jquery.cookie.min.js"></script>
     <!--    <script src="/js/jquery.datetimepicker.full.js"></script>-->
-<!--    <script type="text/javascript" src="/js/jquery.datetimepicker.full.js"></script>-->
+    <!--    <script type="text/javascript" src="/js/jquery.datetimepicker.full.js"></script>-->
     <meta charset="UTF-8">
     <link href="/css/normalform.css" rel="stylesheet" type="text/css">
     <link href="/js/veritylogin.js" rel="stylesheet" type="text/css">
     <link href="/css/bootstrap-table.min.css" rel="stylesheet">
     <script src="/js/bootstrap-table.min.js"></script>
-    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen"/>
+    <!--    <link href="/css/bootstrap-datetimepicker.min.css" media="screen" rel="stylesheet"/>-->
     <script src="/js/moment.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+    <script src="/js/bootstrap-datetimepicker.min.js"></script>
+
     <!--<script src="/js/navgeter.js" type="application/javascript"></script>-->
     <title>我的课表</title>
 </head>
@@ -57,7 +60,7 @@
         <table class="table table-hover" id="mytab"></table>
     </div>
     <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <!-- 模态框头部 -->
                 <div class="modal-header">
@@ -96,26 +99,26 @@
                             </select>
                         </div>
                         <div class="form-group">
-                        <label for="id_end_time">Date only:</label>
-                        <div class="input-group date" id="id_4">
-                            <input type="text" value="05/16/2018" class="form-control" required/>
-                            <div class="input-group-addon input-group-append">
-                                <div class="input-group-text">
-                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                            <label for="id_end_time">Date only:</label>
+                            <div class="input-group date" id="id_4">
+                                <input class="form-control" required type="text" value="12/06/2022"/>
+                                <div class="input-group-addon input-group-append">
+                                    <div class="input-group-text">
+                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        <!-- 模态框底部 -->
-                        <div class="modal-footer">
-                            <button class="btn btn-primary " data-dismiss="modal" type="submit">提交</button>
-                            <button class="btn btn-secondary" data-dismiss="modal" type="button">关闭</button>
-                        </div>
+                    <!-- 模态框底部 -->
+                    <div class="modal-footer">
+                        <button class="btn btn-primary " data-dismiss="modal" type="submit">提交</button>
+                        <button class="btn btn-secondary" data-dismiss="modal" type="button">关闭</button>
                     </div>
-                </form>
-            </div>
+            </form>
         </div>
     </div>
+</div>
 </div>
 <script>
     $('#mytab').bootstrapTable({
@@ -191,6 +194,13 @@
             },
         ]
     });
+    $('#id_4').datetimepicker({
+            "allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+            "format": "MM/DD/YYYY",
+        });
 
     function actionFormatter(value, row, index) {
         var id = value;
@@ -199,21 +209,9 @@
         result += '<button id="delete" class="btn btn-danger btn-sm" style="margin-left:10px;">删除</button>';
         return result;
     }
-    (function($){
-    $(function(){
-        $('#id_4').datetimepicker({
-            "bootcssVer":4,
-             "locale": moment.locale('zh-cn'),
-            "allowInputToggle": true,
-            "showClose": true,
-            "showClear": true,
-            "showTodayButton": true,
-            "format": "MM/DD/YYYY",
-        });
-    });
-})(jQuery);
+
     $(document).ready(function () {
-        $('#datetimepicker').datetimepicker();
+
         $("#pwduser").click(function () {
             var dta = {ptr: $("#selectDay").val(), info: $("#textinfo").val()}
             $('#mytab').bootstrapTable('destroy');

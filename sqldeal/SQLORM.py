@@ -14,8 +14,8 @@ class UserList(Base):  ##用户基础数据
     token = Column(String)
     token_days = Column(Integer)
     tokenstart = Column(Integer)
-    mgroup = Column(Integer)
-
+    mgroup = Column(String)
+    groups=Column(String)
 
 class GroupList(Base):
     __tablename__ = "GroupList"
@@ -79,3 +79,23 @@ class RealUser(Base):
     student_status = Column(String)
     email = Column(String)
     telephone = Column(String)
+
+class examine(Base):
+    __tablename__="exam"
+    numbers = Column(Integer, unique=True, primary_key=True)
+    grp_numbers = Column(Integer)
+    mgroup = Column(Integer)
+    stattime = Column(String)
+    endtime= Column(String)
+    settime= Column(String)
+    names= Column(String)
+    tittle= Column(String)
+    sources=Column(Integer)
+    all_souces=Column(Integer)
+    answer_type=Column(Integer)
+    answer_choo= Column(String)
+    answer_true= Column(String)
+    answer_false=Column(Integer)
+    sprise=Column(Integer)
+    finishstu= Column(String)
+    num = Column(Integer)

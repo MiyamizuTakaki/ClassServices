@@ -17,7 +17,8 @@ app.include_router(classmain.course)
 from functionfloder.userinfo import users
 app.include_router(usermain.usermain)
 app.include_router(users.usersmain)
-
+from functionfloder.testinfo import testmain
+app.include_router(testmain.testinfo)
 
 class UserLogin(BaseModel):
     user: str

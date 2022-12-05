@@ -32,6 +32,7 @@ async def serchuserget(ptr:str,db = Depends(get_db)):
     return  JSONResponse(content=jsonable_encoder(sqlcurd.getuser(db,ptr)))
 @usermain.get("/getgroup",tags=["manauser"])
 async def sergrpbsc(ptr:str,db=Depends(get_db)):
+    t1 =jsonable_encoder(sqlcurd.getgroup(db, ptr))
     return JSONResponse(content=jsonable_encoder(sqlcurd.getgroup(db, ptr)))
 @usermain.post("/getgroup",tags=["manauser"])
 async def sergrpbscs(usrs:usrinfo,db = Depends(get_db)):

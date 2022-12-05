@@ -54,12 +54,12 @@
         }});
     });
     $("#TestInfo").click(function(){
-      $.ajax({url:"/school/myclass/SearchClass.html",async:true,success:function(result){
+      $.ajax({url:"/school/schooltest/testhistory.html",async:true,success:function(result){
           $("#getset").html(result);
         }});
     });
     $("#ManageTest").click(function(){
-      $.ajax({url:"/school/myclass/SearchClass.html",async:true,success:function(result){
+      $.ajax({url:"/school/schooltest/testadmin.html",async:true,success:function(result){
           $("#getset").html(result);
         }});
     });

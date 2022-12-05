@@ -65,8 +65,9 @@ def infogrp(info):
         "statdate":info.statime,
         "enddate":info.endtime
     }
+    return dicts
 def getgroup(db: Session, ptr: str, info=Optional[str]):
-    db_user_firsts = None
+    global db_user_firsts
     get = []
     if ptr == "-1":
         db_user_firsts = db.query(SQLORM.GroupList).order_by(SQLORM.GroupList.grpnum.desc()).all()

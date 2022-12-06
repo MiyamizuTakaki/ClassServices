@@ -1,16 +1,5 @@
 <html lang="en">
 <head>
-    <!-- 新 Bootstrap4 核心 CSS 文件 -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <!--    <link rel="stylesheet" type="text/css" href="/css/jquery.datetimepicker.css" >-->
-
-    <script src="https://www.itxst.com/package/jquery-3.5.1/jquery.min.js"></script>
-    <!-- popper.min.js 用于弹窗、提示、下拉菜单 -->
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
-    <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="/js/jquery.cookie.min.js"></script>
     <!--    <script src="/js/jquery.datetimepicker.full.js"></script>-->
     <!--    <script type="text/javascript" src="/js/jquery.datetimepicker.full.js"></script>-->
@@ -20,10 +9,7 @@
     <link href="/css/bootstrap-table.min.css" rel="stylesheet">
     <script src="/js/bootstrap-table.min.js"></script>
     <!--    <link href="/css/bootstrap-datetimepicker.min.css" media="screen" rel="stylesheet"/>-->
-    <script src="/js/moment.min.js"></script>
-<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
-    <script src="/js/bootstrap-datetimepicker.min.js"></script>
-    <link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css">
+
     <!--<script src="/js/navgeter.js" type="application/javascript"></script>-->
     <title>我的课表</title>
 </head>
@@ -31,7 +17,9 @@
     <div class="row">
         <div class="col-8">用户管理</div>
         <div class="col-1">
-            <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" type="button">创建用户</button>
+            <button class="btn btn-primary" data-target="#myModal" data-toggle="modal" id="adduser" type="button">
+                创建用户
+            </button>
         </div>
     </div>
     <div class="row">
@@ -71,8 +59,12 @@
                     <!-- 模态框主体 -->
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="name">用户名</label>
-                            <input class="form-control" id="name" type="text">
+                            <label for="ids">编号</label>
+                            <input class="form-control" id="ids" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="names">用户名</label>
+                            <input class="form-control" id="names" type="text">
                         </div>
                         <div class="form-group">
                             <label for="usr">用户别名</label>
@@ -83,42 +75,56 @@
                             <input class="form-control" id="pwd" type="password">
                         </div>
                         <div class="form-group">
-                            <label for="fakt">院系部门</label>
+                            <label for="email">电子邮件</label>
+                            <input class="form-control" id="email" type="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">手机号码</label>
+                            <input class="form-control" id="phone" type="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="factname">院系部门</label>
                             <select class="form-control form-control-placeholder"
-                                    id="fakt">
-                                <option disabled hidden id="none1" selected value="-1">全选</option>
-                                <option style="color: black;" value="-1">全选</option>
+                                    id="factname">
+                                <option disabled hidden id="none1" selected value="-1">未选</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="grp">小组/院系号码</label>
+                            <label for="grp">院系号码</label>
                             <select class="form-control form-control-placeholder"
                                     id="grp">
-                                <option disabled hidden id="none" selected value="-1">全选</option>
-                                <option style="color: black;" value="-1">全选</option>
+<!--                                <option disabled hidden id="none" selected value="-1">全选</option>-->
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="id_end_time">Date only:</label>
-                            <div class="input-group date" id="id_4">
-                                <input class="time-input form-control" required type="text" value="12/06/2022"/>
-                                <div class="input-group-addon input-group-append">
-                                    <div class="input-group-text">
-                                        <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                    </div>
-                                </div>
-                            </div>
+                            <label for="mgrp">小组号码</label>
+                            <select class="form-control form-control-placeholder"
+                                    id="mgrp">
+<!--                                <option disabled hidden id="none2" selected value="-1">全选</option>-->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="birthDate">你的生日</label>
+                            <input class="form-control" id="birthDate" type="date"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="startDate">学业开始日期</label>
+                            <input class="form-control" id="startDate" type="date" value=""/>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">学业结束日期</label>
+                            <input class="form-control" id="endDate" type="date" value=""/>
                         </div>
                     </div>
                     <!-- 模态框底部 -->
                     <div class="modal-footer">
-                        <button class="btn btn-primary " data-dismiss="modal" type="submit">提交</button>
+                        <button class="btn btn-primary " data-dismiss="modal" type="submit" id="addinfo">提交</button>
                         <button class="btn btn-secondary" data-dismiss="modal" type="button">关闭</button>
                     </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <script>
     $('#mytab').bootstrapTable({
@@ -194,13 +200,6 @@
             },
         ]
     });
-    $('#id_4').datetimepicker({
-            "allowInputToggle": true,
-            "showClose": true,
-            "showClear": true,
-            "showTodayButton": true,
-            "format": "MM/DD/YYYY",
-        });
 
     function actionFormatter(value, row, index) {
         var id = value;
@@ -210,8 +209,73 @@
         return result;
     }
 
-    $(document).ready(function () {
+    function unique(arr) {
+        return Array.from(new Set(arr))
+    }
 
+    $(document).ready(function () {
+        var list = [];
+        var listfacn = [];
+        var num;
+        $("#adduser").click(function () {
+            token = $.cookie('users_token');
+            $.post("/getallinfo",
+                {
+                    users_token: token
+                },
+                function (detail, status) {
+                    //console.log(detail)
+                    for (var q = 0; q < detail.length; q++) {
+                        list.push(detail[q])
+                        listfacn.push(list[q]["Faculy"])
+                    }
+                    listfacn = unique(listfacn)
+                    for (var q = 0; q < listfacn.length; q++) {
+                        $("#factname").append("<option style=\"color: black;\" value=\"" + (q + 1) + "\">" + listfacn[q] + "</option>");
+                    }
+                });
+        })
+        $("#factname").on("change",function (){
+            $("#grp").empty();
+                    var options = $('#factname option:selected')
+            for(var i =0;i<list.length;i++)
+            {
+                 if (options.text() == list[i]["Faculy"])
+                     $("#grp").append("<option style=\"color: black;\" value=\"" + list[i]["grpnum"] + "\">" + list[i]["grpnum"] + "</option>")
+            }
+             var options = $('#grp option:selected')
+            var statime;
+            var endtime;
+            for(var i =0;i<list.length;i++)
+            {
+                if(options.val() == list[i]["grpnum"])
+                {
+                    statime = list[i]["ststime"]
+                    endtime = list[i]["enddtime"]
+                }
+            }
+            startDate.value = statime
+            endDate.value = endtime
+        })
+        $("#grp").on("change",function (){
+            var statime;
+            var endtime;
+            for(var i =0;i<list.length;i++)
+            {
+                if($(this).val() == list[i]["grpnum"])
+                {
+                    statime = list[i]["ststime"]
+                    endtime = list[i]["enddtime"]
+                    num = list[i]["studnum"]
+                }
+            }
+            startDate.value = statime
+            endDate.value = endtime
+            $("#mgrp").empty()
+            console.log(parseInt(num))
+            for(var i=0;i<parseInt(num)+1;i++)
+                    $("#mgrp").append("<option style=\"color: black;\" value=\"" + i + "\">" + i + "</option>")
+        })
         $("#pwduser").click(function () {
             var dta = {ptr: $("#selectDay").val(), info: $("#textinfo").val()}
             $('#mytab').bootstrapTable('destroy');
@@ -297,6 +361,30 @@
                     info: $.trim($("#textinfo").val())
                 }
             }
+        })
+        $("#addinfo").click(function (){
+            token = $.cookie('users_token')
+            var formData={
+                id:$("#ids").val(),
+                users_token:token,
+                names:$("#names").val(),
+                usr:$("#usr").val(),
+            pwd:$("#pwd").val(),
+            email:$("#email").val(),
+            phone:$("#phone").val(),
+            factname:$("#factname").text(),
+            grp:$("#grp").val(),
+            mgrp:$("#mgrp").val(),
+            birthDate:$("#birthDate").val(),
+            startDate:$("#startDate").val(),
+            endDate:$("#endDate").val(),
+            }
+            $.ajax({
+                    type: "POST",
+                    url: "/advsrch",
+                    data: formData,
+                    encode: true,
+                }).done()
         })
     })
 

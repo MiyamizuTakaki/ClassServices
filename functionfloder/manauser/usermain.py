@@ -12,7 +12,6 @@ def get_db():
         yield db
     finally:
         db.close()
-
 @usermain.get("/manauser/{info}",tags=["manauser"])
 async def serchpage(info:str):
     try:
@@ -37,3 +36,33 @@ async def sergrpbsc(ptr:str,db=Depends(get_db)):
 @usermain.post("/getgroup",tags=["manauser"])
 async def sergrpbscs(usrs:usrinfo,db = Depends(get_db)):
     return  JSONResponse(content=jsonable_encoder(sqlcurd.getgroup(db,usrs.ptr,usrs.info)))
+@usermain.post("/getallinfo",tags=["manauser"])
+async def getallinfo(users_token: Optional[str] = Cookie(None),db = Depends(get_db)):
+    return JSONResponse(content=jsonable_encoder(sqlcurd.getalluserinfo(db)))
+class addusermod(BaseModel):
+    id=Form()
+    names=Form()
+    usr=Form()
+    pwd=Form()
+    email=Form()
+    phone=Form()
+    factname=Form()
+    grp=Form()
+    mgrp=Form()
+    birthDate=Form()
+    startDate=Form()
+    endDate=Form()
+@usermain.post("/adduser",tags=["manauser"])
+async def adduser(users_token: Optional[str] = Cookie(None),adduser=addusermod,db = Depends(get_db)):
+    try:
+        db_user = sqlcurd.get_uer_token(db, token=users_token)
+        if db_user==0:
+            raise HTTPException(detail="验证失败！",status_code=403)
+        else:
+            if db_user.ACL!=0:
+                raise  HTTPException(detail="验证失败！",status_code=403)
+
+        returnsponce = JSONResponse(content=db_user, status_code=200)
+        return None
+    except:
+        raise HTTPException(status_code=500)

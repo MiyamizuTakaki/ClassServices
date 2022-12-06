@@ -3,7 +3,7 @@ from typing import Optional
 from sqlalchemy.orm import Session
 
 from sqldeal import SQLORM
-
+from pydantic import BaseModel
 
 def infosdict(info, nickname):
     dicts = {
@@ -22,7 +22,16 @@ def infosdict(info, nickname):
     }
     return dicts
 
-
+def alluser(info):
+    return {
+        "grpnum":info.grpnum,
+        "Faculy":info.Faculy,
+        "facname":info.facname,
+        "antrname":info.antrname,
+        "ststime":info.statime,
+        "enddtime":info.endtime,
+        "studnum":info.studnum
+    }
 def getuser(db: Session, ptr: str, info=Optional[str]):
     db_user_firsts = None
     get = []
@@ -92,3 +101,37 @@ def getgroup(db: Session, ptr: str, info=Optional[str]):
     for db_user_first in db_user_firsts:
         get.append(infogrp(db_user_first))
     return get
+
+def getalluserinfo(db:Session):
+    infos = []
+    allinfos = db.query(SQLORM.GroupList).order_by(SQLORM.GroupList.grpnum.desc()).all()
+    for allinfo in allinfos:
+        infos.append(alluser(allinfo))
+    return infos
+
+def get_uer_token(db: Session,token:str):
+    db_user = db.query(SQLORM.UserList).filter(SQLORM.UserList.token == token).first()
+    if db_user is not None:
+        ust = db_user.usernames
+        return db_user
+    else:
+        return 0
+class addusermod(BaseModel):
+    id:str
+    names :str
+    usr :str
+    pwd :str
+    email :Optional[str]=None
+    phone:Optional[str]=None
+    factname:str
+    grp:str
+    mgrp:int
+    birthDate:str
+    startDate:str
+    endDate:str
+def adduser(addusermod:addusermod,db:Session):
+    grpif = db.query(SQLORM.GroupList).filter(SQLORM.GroupList.grpnum==addusermod.grp).first()
+    add_user = SQLORM.RealUser(addusermod.id,addusermod.grp,addusermod.grp,addusermod.mgrp,
+                               addusermod.factname,grpif.facname,addusermod.birthDate,addusermod.startDate,addusermod.endDate)
+    add_usinfo=SQLORM.UserList()
+    return None

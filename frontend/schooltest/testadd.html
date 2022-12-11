@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>试题创建页面</title>
+    <title>Страница создания тестового вопроса</title>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="https://cdn.bootcss.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" rel="external nofollow"
@@ -16,17 +16,18 @@
 </head>
 <body>
 <div class="container">
-    <h2>测试添加，分值10分</h2>
+    <h2>Добавлен в тест</h2>
     <form id="e1">
         <div class="form-group">
-            <label for="title">标题</label>
-            <input class="form-control" id="title" placeholder="在这里输入本次测试标题" required type="text">
+            <label for="title">подпись</label>
+            <input class="form-control" id="title" placeholder="Введите название этого теста здесь" required
+                   type="text">
         </div>
         <div id="timus">
         </div>
-        <button class="btn btn-info" id="additem" type="button">添加题目</button>
-        <button class="btn btn-warning" id="removeitem" type="button">删除题目</button>
-        <button class="btn btn-primary" id="send" type="submit">发布</button>
+        <button class="btn btn-info" id="additem" type="button">Добавить тему</button>
+        <button class="btn btn-warning" id="removeitem" type="button">Удалить тему</button>
+        <button class="btn btn-primary" id="send" type="submit">сообщать</button>
     </form>
 
 </div>
@@ -63,9 +64,9 @@
             var ited = "<div id=\"aped" + ids + "\">\n" +
                 "            <div class=\"form-group\">\n" +
                 "                <label for=\"questionitem" + ids + "\">题目" + ids + "</label>\n" +
-                "                <textarea  class=\"form-control\" id=\"questionitem" + ids + "\" placeholder=\"在这里输入你的题目\" type=\"text\" name='titlem' required>" + "</textarea >" + "\n" +
-                "                <textarea  class=\"form-control\" id=\"selsct" + ids + "\" placeholder=\"在这里输入你的选项（每个选项空格）\" type=\"text\" name='shce' required>" + "</textarea >" + "\n" +
-                "                <textarea  class=\"form-control\" id=\"answers" + ids + "\" placeholder=\"在这里输入你的答案（目前只支持单选题目）\" type=\"text\" name='answ' required>" + "</textarea >" + "\n" +
+                "                <textarea  class=\"form-control\" id=\"questionitem" + ids + "\" placeholder=\"Введите свою тему здесь\" type=\"text\" name='titlem' required>" + "</textarea >" + "\n" +
+                "                <textarea  class=\"form-control\" id=\"selsct" + ids + "\" placeholder=\"Введите свои параметры здесь (пробел для каждого параметра)\" type=\"text\" name='shce' required>" + "</textarea >" + "\n" +
+                "                <textarea  class=\"form-control\" id=\"answers" + ids + "\" placeholder=\"Введите свой ответ здесь (в настоящее время поддерживаются только вопросы с одним выбором)\" type=\"text\" name='answ' required>" + "</textarea >" + "\n" +
                 "            </div>\n" +
                 "        </div>"
             $("#timus").append(ited)

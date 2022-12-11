@@ -15,34 +15,35 @@
     }
 </style>
 <div class="container">
-    <h1 class="display-1">高阶查询</h1>
+    <h1 class="display-1">проверять</h1>
     <form action="/advsrch" method="post" name="userinfo" id="userpass">
 
-        <label for="grpl">组编号</label>
+        <label for="grpl">Номер группы</label>
         <label for="grpl"></label><input type="text" class="form-control" list="grpl" id="grp" value=''
                                          onfocus="this.value=''">
         <datalist id="grpl">
         </datalist>
-        <label for="mgrpl">小组编号</label>
+        <label for="mgrpl">м. Номер группы</label>
         <label for="mgrpl"></label><input type="text" class="form-control" list="mgrpl" id="mgrp" value='0'
                                           onfocus="this.value=''">
         <datalist id="mgrpl">
         </datalist>
-        <label for="selectDay">日期</label><select id="selectDay" class="form-control form-control-placeholder">
-        <option value="-1" id="chse1" disabled selected hidden>选择</option>
-        <option value="0" style="color: black;">星期一</option>
-        <option value="1" style="color: black;">星期二</option>
-        <option value="2" style="color: black;">星期三</option>
-        <option value="3" style="color: black;">星期四</option>
-        <option value="4" style="color: black;">星期五</option>
-        <option value="5" style="color: black;">星期六</option>
-        <option value="6" style="color: black;">星期日</option>
+        <label for="selectDay">дата</label><select id="selectDay" class="form-control form-control-placeholder">
+        <option value="-1" id="chse1" disabled selected hidden>выбор</option>
+        <option value="0" style="color: black;">понедельник</option>
+        <option value="1" style="color: black;">вторник</option>
+        <option value="2" style="color: black;">среда</option>
+        <option value="3" style="color: black;">четверг</option>
+        <option value="4" style="color: black;">пятница</option>
+        <option value="5" style="color: black;">суббота</option>
+        <option value="6" style="color: black;">воскресенье</option>
     </select>
-        <label for="selectWeek">单双周</label><select id="selectWeek" class="form-control form-control-placeholder">
-        <option value="-1" id="weks" disabled selected hidden>全部</option>
-        <option value="0" style="color: black;">全部</option>
-        <option value="1" style="color: black;">单数周</option>
-        <option value="2" style="color: black;">双数周</option>
+        <label for="selectWeek">Раз в две недели</label><select id="selectWeek"
+                                                                class="form-control form-control-placeholder">
+        <option value="-1" id="weks" disabled selected hidden>все</option>
+        <option value="0" style="color: black;">все</option>
+        <option value="1" style="color: black;">Нечетная неделя</option>
+        <option value="2" style="color: black;">Двойная неделя</option>
     </select>
         <button type="submit" class="btn btn-primary" id="classsearch">查询</button>
 
@@ -51,14 +52,14 @@
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
-            <td>序号</td>
-            <td>小组号码</td>
-            <td>名称</td>
-            <td>课程开始时间</td>
-            <td>课程结束时间</td>
-            <td>地点</td>
-            <td>类型</td>
-            <td>教师姓名</td>
+            <td>серийный номер</td>
+            <td>Номер группы</td>
+            <td>название</td>
+            <td>Время начала курса</td>
+            <td>Время окончания курса</td>
+            <td>Мечто</td>
+            <td>тип</td>
+            <td>Имя учителя</td>
         </tr>
         </thead>
         <tbody id="mozhide">
@@ -133,7 +134,7 @@
                         lengths++;
                     }
                     if (lengths === 0)
-                        alert("没有课程！")
+                        alert("Никакого курса!")
                     for (var i = 0; i < lengths; i++) {
                         console.log(sectotime(data[i]["starttime"]))
                         var intoe = '<tr>\n' +

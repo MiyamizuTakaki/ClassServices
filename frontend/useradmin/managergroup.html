@@ -20,30 +20,30 @@
 </head>
 <div class="container">
     <div class="row">
-        <div class="col-8">院系/群组管理</div>
+        <div class="col-8">Управление отделом/группой</div>
         <div class="col-1">
-            <button class="btn btn-info" type="button">添加用户</button>
+            <button class="btn btn-info" type="button">Добавить пользователя</button>
         </div>
     </div>
     <div class="row">
         <div class="col-4">
-            <label for="selectDay">筛选条件</label><select class="form-control form-control-placeholder"
-                                                           id="selectDay">
-            <option disabled hidden id="chse1" selected value="-1">全选</option>
-            <option style="color: black;" value="-1">全选</option>
-            <option style="color: black;" value="0">组号</option>
-            <option style="color: black;" value="1">院系名称</option>
-            <option style="color: black;" value="2">科目名称</option>
-            <option style="color: black;" value="3">别名</option>
-            <option style="color: black;" value="4">开始日期</option>
-            <option style="color: black;" value="5">结束日期</option>
+            <label for="selectDay">Критерии фильтрации</label><select class="form-control form-control-placeholder"
+                                                                      id="selectDay">
+            <option disabled hidden id="chse1" selected value="-1">Выбрать все</option>
+            <option style="color: black;" value="-1">Выбрать все</option>
+            <option style="color: black;" value="0">Номер группы</option>
+            <option style="color: black;" value="1">Название отдела</option>
+            <option style="color: black;" value="2">Название темы</option>
+            <option style="color: black;" value="3">прозвище</option>
+            <option style="color: black;" value="4">Дата начала</option>
+            <option style="color: black;" value="5">Дата окончания</option>
         </select>
         </div>
-        <div class="col-4"><label>筛选条件</label>
+        <div class="col-4"><label>Критерии фильтрации</label>
 
             <input class="form-control" id="textinfo" placeholder="内容" type="text"></div>
         <div class="col-4">
-            <div class="col-4"><label>然后就</label>
+            <div class="col-4"><label>А потом просто</label>
                 <button class="btn btn-primary" data-dismiss="modal" id="pwduser">搜索</button>
             </div>
         </div>
@@ -65,45 +65,45 @@
         pagination: true, // 是否分页
         sortable: true, // 是否启用排序
         columns: [{
-                    field: 'grpnum',
-                    title: '组号'
-                },
-                    {
-                        field: 'facname',
-                        title: '院系名称'
-                    },
-                    {
-                        field: 'clsname',
-                        title: '科目名称'
-                    },
-                    {
-                        field: 'nckname',
-                        title: '别名'
-                    },
-                    {
-                        field: 'statdate',
-                        title: '开始日期'
-                    },
-                    {
-                        field: 'enddate',
-                        title: '结束日期'
-                    },
-                    {
-                        field: 'price',
-                        title: '操作',
-                        width: 120,
-                        align: 'center',
-                        valign: 'middle',
-                        formatter: actionFormatter,
-                    },
-                ]
+            field: 'grpnum',
+            title: 'Номер группы'
+        },
+            {
+                field: 'facname',
+                title: 'Название отдела'
+            },
+            {
+                field: 'clsname',
+                title: 'Название темы'
+            },
+            {
+                field: 'nckname',
+                title: 'прозвище'
+            },
+            {
+                field: 'statdate',
+                title: 'Дата начала'
+            },
+            {
+                field: 'enddate',
+                title: 'Дата окончания'
+            },
+            {
+                field: 'price',
+                title: 'работать',
+                width: 120,
+                align: 'center',
+                valign: 'middle',
+                formatter: actionFormatter,
+            },
+        ]
     });
 
     function actionFormatter(value, row, index) {
         var id = value;
         var result = "";
-        result += '<button id="edit" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>';
-        result += '<button id="delete" class="btn btn-danger btn-sm" style="margin-left:10px;">删除</button>';
+        result += '<button id="edit" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">редактор</button>';
+        result += '<button id="delete" class="btn btn-danger btn-sm" style="margin-left:10px;">удалить</button>';
         return result;
     }
 
@@ -126,31 +126,31 @@
                 sortable: true, // 是否启用排序
                 columns: [{
                     field: 'grpnum',
-                    title: '组号'
+                    title: 'Номер группы'
                 },
                     {
                         field: 'facname',
-                        title: '院系名称'
+                        title: 'Название отдела'
                     },
                     {
                         field: 'clsname',
-                        title: '科目名称'
+                        title: 'Название темы'
                     },
                     {
                         field: 'nckname',
-                        title: '别名'
+                        title: 'прозвище'
                     },
                     {
                         field: 'statdate',
-                        title: '开始日期'
+                        title: 'Дата начала'
                     },
                     {
                         field: 'enddate',
-                        title: '结束日期'
+                        title: 'Дата окончания'
                     },
                     {
                         field: 'price',
-                        title: '操作',
+                        title: 'работать',
                         width: 120,
                         align: 'center',
                         valign: 'middle',
@@ -162,8 +162,8 @@
             function actionFormatter(value, row, index) {
                 var id = value;
                 var result = "";
-                result += '<button id="edit" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">编辑</button>';
-                result += '<button id="delete" class="btn btn-danger btn-sm" style="margin-left:10px;">删除</button>';
+                result += '<button id="edit" class="btn btn-info btn-sm" data-toggle="modal" data-target="#editModal">редактор</button>';
+                result += '<button id="delete" class="btn btn-danger btn-sm" style="margin-left:10px;">удалить</button>';
                 return result;
             }
 

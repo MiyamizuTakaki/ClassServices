@@ -10,7 +10,7 @@ window.onload = function () {
     document.getElementById("setSchedule").onclick = setSchedule;//课表设置
     document.getElementById("setUser").onclick = setSchedule;//用户管理*/
 //各功能页面登录
-    document.getElementById("mySchedule").onclick = function() {
+    document.getElementById("mySchedule").onclick = function () {
         xhr.open("GET", "http://localhost:63341/school/myclass/" + this.id + ".html", true);
         xhr.send();
         xhr.onreadystatechange = function () {

@@ -1,24 +1,29 @@
-from fastapi import FastAPI, HTTPException, Form, Cookie, Depends
-from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
 from typing import Optional
-from sqldeal import sqlcurd, SQLORM, sqlpydantic
-from sqldeal.SQLMAIN import SessionLocal, engine
-from passlib.context import CryptContext
+
+from fastapi import FastAPI, HTTPException, Form, Cookie, Depends
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import HTMLResponse, JSONResponse
+from pydantic import BaseModel
 from sqlalchemy.orm import Session
-from roterdepender import manageinfo, cssjs
+
 from functionfloder.classinfo import classmain
 from functionfloder.manauser import usermain
+from roterdepender import manageinfo, cssjs
+from sqldeal import sqlcurd
+from sqldeal.SQLMAIN import SessionLocal
+
 app = FastAPI()
 app.include_router(manageinfo.app1)
 app.include_router(cssjs.sources)
 app.include_router(classmain.course)
 from functionfloder.userinfo import users
+
 app.include_router(usermain.usermain)
 app.include_router(users.usersmain)
 from functionfloder.testinfo import testmain
+
 app.include_router(testmain.testinfo)
+
 
 class UserLogin(BaseModel):
     user: str

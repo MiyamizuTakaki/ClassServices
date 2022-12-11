@@ -1,12 +1,12 @@
-from fastapi import APIRouter, HTTPException, Cookie, Depends, Form
-from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.encoders import jsonable_encoder
 from typing import Optional
-from sqldeal.SQLMAIN import SessionLocal
-from .sql.sqlcurd import *
+
+from fastapi import APIRouter, HTTPException, Cookie, Depends, Form
+from fastapi.encoders import jsonable_encoder
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-import json
+from sqldeal.SQLMAIN import SessionLocal
+from .sql.sqlcurd import *
 
 course = APIRouter()
 
@@ -54,17 +54,21 @@ async def grpinfo(grps: str, db: Session = Depends(get_db)):
         return JSONResponse(content=jsonable_encoder(get_groupinfo(db, grps)), status_code=200)
     except:
         raise HTTPException(status_code=404)
+
+
 class Item(BaseModel):
     info: str
     tip: str
+
+
 @course.post("/avssimp/", tags=["courses"])
-async def avssimp(item:Item, db: Session = Depends(get_db)):
+async def avssimp(item: Item, db: Session = Depends(get_db)):
     # try:
-        isd = get_moreinfo(db, item.info, item.tip)
-        if isd is not None:
-            return JSONResponse(content=jsonable_encoder(isd), status_code=200)
-        else:
-            err = {"code":1}
-            return JSONResponse(content=jsonable_encoder(err), status_code=200)
-    # except:
-    #     raise HTTPException(status_code=404)
+    isd = get_moreinfo(db, item.info, item.tip)
+    if isd is not None:
+        return JSONResponse(content=jsonable_encoder(isd), status_code=200)
+    else:
+        err = {"code": 1}
+        return JSONResponse(content=jsonable_encoder(err), status_code=200)
+# except:
+#     raise HTTPException(status_code=404)

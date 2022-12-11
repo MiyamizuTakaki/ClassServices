@@ -16,29 +16,29 @@
 </style>
 <div class="container">
     <form action="/advsrch" id="userpass" method="post" name="userinfo">
-        <label for="selectGroup">大组编号</label><select class="form-control form-control-placeholder" id="selectGroup">
-        <option disabled hidden id="setgrp" selected value="-1">默认</option>
+        <label for="selectGroup">Групп №</label><select class="form-control form-control-placeholder" id="selectGroup">
+        <option disabled hidden id="setgrp" selected value="-1">по умолчанию</option>
     </select>
-        <label for="selectmGroup">小组编号</label><select class="form-control form-control-placeholder"
-                                                          id="selectmGroup">
+        <label for="selectmGroup">М Групп №</label><select class="form-control form-control-placeholder"
+                                                           id="selectmGroup">
         <option disabled hidden id="grpnor" selected value="0">0</option>
     </select>
         <label for="selectDay">日期</label><select class="form-control form-control-placeholder" id="selectDay">
-        <option disabled hidden id="chse1" selected value="-1">选择</option>
-        <option style="color: black;" value="0">星期一</option>
-        <option style="color: black;" value="1">星期二</option>
-        <option style="color: black;" value="2">星期三</option>
-        <option style="color: black;" value="3">星期四</option>
-        <option style="color: black;" value="4">星期五</option>
-        <option style="color: black;" value="4">星期六</option>
-        <option style="color: black;" value="4">星期日</option>
+        <option disabled hidden id="chse1" selected value="-1">выбор</option>
+        <option style="color: black;" value="0">понедельник</option>
+        <option style="color: black;" value="1">вторник</option>
+        <option style="color: black;" value="2">среда</option>
+        <option style="color: black;" value="3">четверг</option>
+        <option style="color: black;" value="4">пятница</option>
+        <option style="color: black;" value="4">суббота</option>
+        <option style="color: black;" value="4">воскресенье</option>
     </select>
-        <div>单双周</div>
+        <div>Раз в две недели</div>
         <label for="selectWeek"></label><select class="form-control form-control-placeholder" id="selectWeek">
-        <option disabled hidden id="weks" selected value="-1">全部</option>
-        <option style="color: black;" value="0">全部</option>
-        <option style="color: black;" value="1">单数周</option>
-        <option style="color: black;" value="2">双数周</option>
+        <option disabled hidden id="weks" selected value="-1">все</option>
+        <option style="color: black;" value="0">все</option>
+        <option style="color: black;" value="1">Нечетная неделя</option>
+        <option style="color: black;" value="2">Двойная неделя</option>
     </select>
         <button class="btn btn-primary" id="classsearch" type="submit">查询</button>
 
@@ -48,14 +48,14 @@
     <table class="table table-hover table-bordered">
         <thead>
         <tr>
-            <td>序号</td>
-            <td>小组号码</td>
-            <td>名称</td>
-            <td>课程开始时间</td>
-            <td>课程结束时间</td>
-            <td>地点</td>
-            <td>类型</td>
-            <td>教师姓名</td>
+            <td>№</td>
+            <td>Номер группы</td>
+            <td>название</td>
+            <td>Время начала курса</td>
+            <td>Время окончания курса</td>
+            <td>мечто</td>
+            <td>тип</td>
+            <td>Имя учителя</td>
         </tr>
         </thead>
         <tbody id="mozhide">
@@ -120,7 +120,7 @@
                 }
             })
         $("#chse1").text(function getDataWeek() {
-            var today = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            var today = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
             var tdynum = [0, 1, 2, 3, 4, 5, 6]
             var mmdd = new Date();
             return today[mmdd.getDay()];
@@ -130,9 +130,9 @@
             var mmdd = new Date();
             var dsz = Math.floor((mmdd.getTime() / 60 / 60 / 24 / 365 / 7) % 2 + 1)
             if (dsz === 1) {
-                return "单数周"
+                return "Нечетная неделя"
             } else {
-                return "双数周"
+                return "Двойная неделя"
             }
 
         })
@@ -160,7 +160,7 @@
                         lengths++;
                     }
                     if (lengths === 0)
-                        alert("没有课程！")
+                        alert("Никакого курса！")
                     for (var i = 0; i < lengths; i++) {
                         console.log(sectotime(data[i]["starttime"]))
                         var intoe = '<tr>\n' +

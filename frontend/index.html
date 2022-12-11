@@ -9,12 +9,14 @@
     <script src="https://cdn.bootcss.com/popper.js/1.12.5/umd/popper.min.js"></script>
     <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
     <script src="https://cdn.bootcss.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js" integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"
+            integrity="sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn"
+            crossorigin="anonymous"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <link rel="stylesheet"  type="text/css" href="/js/veritylogin.js">
+    <link rel="stylesheet" type="text/css" href="/js/veritylogin.js">
 
     <meta charset="UTF-8">
-    <title>课程服务系统</title>
+    <title>Система управления курсом</title>
 </head>
 <style>
     html {
@@ -37,17 +39,17 @@
 <body>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <!-- Brand -->
-    <a class="navbar-brand " href="#">课程服务系统</a>
+    <a class="navbar-brand " href="#">Система управления курсом</a>
     <!-- Links -->
     <ul class="nav navbar-nav nav-right ml-auto">
         <li class="nav-item">
             <div class="dropdown">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" id="setview">
-                    登录
+                    войти
                 </button>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="#" id="enteradmin">进入管理</a>
-                    <a class="dropdown-item" href="#" id="exitaccu">退出</a>
+                    <a class="dropdown-item" href="#" id="enteradmin">Войдите в управление</a>
+                    <a class="dropdown-item" href="#" id="exitaccu">выходить из</a>
                 </div>
             </div>
         </li>
@@ -56,35 +58,39 @@
                 <div class="modal-content">
                     <!-- 模态框头部 -->
                     <div class="modal-header ">
-                        <h4 class="modal-title">登录</h4>
+                        <h4 class="modal-title">войти</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <!-- 模态框主体 -->
                     <form action="/" method="post" name="userinfo" class="was-validated" id="userpass">
-                    <div class="modal-body modal-lg">
+                        <div class="modal-body modal-lg">
                             <div class="form-group">
                                 <label for="usr">用户名:</label>
-                                <input type="text" class="form-control" id="usr" placeholder="输入用户名" name="uname" required>
-                                 <div class="invalid-feedback">请输入用户名！</div>
+                                <input type="text" class="form-control" id="usr" placeholder="Введите имя пользователя"
+                                       name="uname" required>
+                                <div class="invalid-feedback">Пожалуйста, введите имя пользователя！</div>
                             </div>
                             <div class="form-group">
-                                <label for="pwd">密码:</label>
-                                <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-                                <div class="invalid-feedback">请输入密码！</div>
+                                <label for="pwd">пароль:</label>
+                                <input type="password" class="form-control" id="pwd" placeholder="Enter password"
+                                       name="pswd" required>
+                                <div class="invalid-feedback">Пожалуйста, введите пароль！</div>
                             </div>
                             <!-- <div class="form-group form-check">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" id="cok" name="cookie"> 记住我，但只有十四天有效期(使用cookie)
                                 </label>
                             </div> -->
-                            登录意味着您同意许可条款以及校规校纪！
+                            Вход в систему означает, что вы согласны с условиями лицензии и школьными правилами и
+                            предписаниями!
 
-                    </div>
-                    <!-- 模态框底部 -->
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="pwduser">登录</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-                    </div>
+                        </div>
+                        <!-- 模态框底部 -->
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" data-dismiss="modal" id="pwduser">войти
+                            </button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">закрывать</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -92,89 +98,86 @@
     </ul>
 </nav>
 <div class="container ">
-    <h1 class="display-1 text-center">课程服务系统</h1>
-    <h2 class="display-4 text-center">实用，适合于每个人</h2>
+    <h1 class="display-1 text-center">Система управления курсом</h1>
+    <h2 class="display-4 text-center">Практичный, подходит для всех</h2>
     <div style="text-align:center">
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="mylogins">现在登录</button>
+        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" id="mylogins">现在登录
+        </button>
     </div>
     <div class="modal fade" id="tips">
         <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-       
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-              <h4 class="modal-title">发生错误了！</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Произошла ошибка!！</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    Неверный пароль
+                </div>
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
+                </div>
+
             </div>
-       
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-              密码错误
-            </div>
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-dismiss="modal">关闭</button>
-            </div>
-       
-          </div>
         </div>
-      </div>
+    </div>
 </div><!--网站主题-->
 </body>
 <script>
-    $(document).ready(function(){
-        token =$.cookie('users_token')
+    $(document).ready(function () {
+        token = $.cookie('users_token')
         console.log(token)
         $.post("/cookiess",
             {
                 users_token: token
             },
             function (detail) {
-        console.log(detail)
-        $("#setview").hide();
-        if(detail["code"]=="1")
-        {
+                console.log(detail)
+                $("#setview").hide();
+                if (detail["code"] == "1") {
 
-            $("#setview").show();
-            $("#setview").text(detail["user"]);
-            $("#mylogins").hide();
-        }else if(detail["code"]=="0")
-        {
-            $(function(){
-                $.removeCookie('users_token')
-            })
-        }
-    });
+                    $("#setview").show();
+                    $("#setview").text(detail["user"]);
+                    $("#mylogins").hide();
+                } else if (detail["code"] == "0") {
+                    $(function () {
+                        $.removeCookie('users_token')
+                    })
+                }
+            });
     });
     $(function () {
         $("#setview").hide();
         $("#userpass").bootstrapValidator;
         $("#pwduser").click(function () {
             $("#userpass").ajaxSubmit(
-                function (detail,result) {
-        console.log(detail);
-        if(detail["code"]=="0")
-        {
-            $("#setview").show();
-            $("#setview").text(detail["detail"]);
-            $("#mylogins").hide();
-        }else if(detail["code"]=="1")
-        {
-            $(function(){
-                $('#tips').modal('show');
-            })
-        }
-    }
-    );
+                function (detail, result) {
+                    console.log(detail);
+                    if (detail["code"] == "0") {
+                        $("#setview").show();
+                        $("#setview").text(detail["detail"]);
+                        $("#mylogins").hide();
+                    } else if (detail["code"] == "1") {
+                        $(function () {
+                            $('#tips').modal('show');
+                        })
+                    }
+                }
+            );
         });
     })
-    $(document).ready(function(){
-        $("#enteradmin").click(function(){
-            window.location.href="./manager.html"
+    $(document).ready(function () {
+        $("#enteradmin").click(function () {
+            window.location.href = "./manager.html"
         });
-        $("#exitaccu").click(function(){
+        $("#exitaccu").click(function () {
             $.removeCookie('users_token')
-            window.location.href="./"
+            window.location.href = "./"
         })
     });
     this.minHeight = document.documentElement.clientHeight - 100;

@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from sqldeal import SQLORM
 from ..sql import modelset
 
+
 def infobasic(info):
     dicts = {
         "grp_numbers": info.numbers,

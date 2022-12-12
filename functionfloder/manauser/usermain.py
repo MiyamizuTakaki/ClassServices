@@ -90,17 +90,30 @@ async def adduser(users_token: Optional[str] = Cookie(None),
                   startDate=Form(),
                   endDate=Form(),
                   db=Depends(get_db)):
-    try:
         db_user = sqlcurd.get_uer_token(db, token=users_token)
         if db_user == 0:
             raise HTTPException(detail="验证失败！", status_code=403)
         else:
             if db_user.ACL != 0:
                 raise HTTPException(detail="验证失败！", status_code=403)
-        infomod = addusermod
-        infomod.grp = grp
         from functionfloder.manauser.sql.sqlcurd import adduserdb
-        adduserdb(id, names, usr, pwd, factname, grp, mgrp, birthDate, startDate, endDate, email, phone, db)
-        return None
-    except:
-        raise HTTPException(status_code=500)
+        error = adduserdb(id, names, usr, pwd, factname, grp, mgrp, birthDate, startDate, endDate, email, phone, db)
+        if error==1:
+            raise HTTPException(status_code=455,detail="Error")
+
+        return JSONResponse(content={"code":0},status_code=200)
+
+@usermain.post("/deluser",tags=["manauser"])
+async def deluser(id:str,user_token:Optional[str]=Cookie(None),db=Depends(get_db)):
+    db_user = sqlcurd.get_uer_token(db, token=user_token)
+    if db_user == 0:
+        raise HTTPException(detail="验证失败！", status_code=403)
+    else:
+        if db_user.ACL != 0:
+            raise HTTPException(detail="验证失败！", status_code=403)
+    from functionfloder.manauser.sql.sqlcurd import deluserdb
+    error = deluserdb(id,db)
+    if error == 1:
+        raise HTTPException(status_code=455, detail="Error")
+
+    return JSONResponse(content={"code": 0}, status_code=200)

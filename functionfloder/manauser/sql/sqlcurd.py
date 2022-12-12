@@ -154,11 +154,20 @@ def adduserdb(id: str,
               endDate: str,
               email: Optional[str],
               phone: Optional[str], db: Session):
-    grpif = db.query(SQLORM.GroupList).filter(SQLORM.GroupList.grpnum == addusermod.grp).first()
-    add_user = SQLORM.RealUser(id, names, grp, mgrp,
-                               factname, grpif.facname, birthDate, startDate, endDate, email, phone)
-    db.add(add_user)
-    add_usinfo = SQLORM.UserList(id, usr, pwd, 1, str(mgrp), grp)
-    db.add(add_usinfo)
-    db.commit()
-    return None
+        grpif = db.query(SQLORM.GroupList).filter(SQLORM.GroupList.grpnum == grp).first()
+        add_user = SQLORM.RealUser(id=id, name=names, groups=grp, mgroup=mgrp,
+                                   Bachelor=factname, Faculty=grpif.facname, birthdate=birthDate,
+                                   startstudy=startDate, endstudy=endDate, email=email, telephone=phone,student_status="3")
+        db.add(add_user)
+        add_usinfo = SQLORM.UserList(id=id, usernames=usr, passwords=pwd, ACL=1, mgroup=str(mgrp), groups=grp)
+        db.add(add_usinfo)
+        db.commit()
+        return 0
+
+def deluserdb(id:str,db:Session):
+    try:
+        db.query(SQLORM.RealUser).filter(SQLORM.RealUser.id==id).delete()
+        db.commit()
+        return 0
+    except:
+        return 1

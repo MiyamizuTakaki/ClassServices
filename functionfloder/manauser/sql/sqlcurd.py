@@ -171,3 +171,11 @@ def deluserdb(id:str,db:Session):
         return 0
     except:
         return 1
+
+def usereditget(id:str,db:Session):
+    try:
+        db_user1 = db.query(SQLORM.RealUser).filter(SQLORM.RealUser.id==id).first()
+        db_user2 = db.query(SQLORM.UserList).filter(SQLORM.UserList.id==id).first()
+        return 0
+    except:
+        return 1

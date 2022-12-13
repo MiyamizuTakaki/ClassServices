@@ -117,3 +117,13 @@ async def deluser(id:str,user_token:Optional[str]=Cookie(None),db=Depends(get_db
         raise HTTPException(status_code=455, detail="Error")
 
     return JSONResponse(content={"code": 0}, status_code=200)
+@usermain.post("/edituser",tags=["manauser"])
+async def edituser(id:str,user_token:Optional[str]=Cookie(None),db=Depends(get_db)):
+    db_user = sqlcurd.get_uer_token(db, token=user_token)
+    if db_user == 0:
+        raise HTTPException(detail="验证失败！", status_code=403)
+    else:
+        if db_user.ACL != 0:
+            raise HTTPException(detail="验证失败！", status_code=403)
+
+    return None
